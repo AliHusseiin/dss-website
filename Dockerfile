@@ -21,4 +21,4 @@ RUN npm run build
 # --configuration production
 
 # Serve the app using serve on port 5002
-CMD ["serve", "-s", "dist/dss", "-l", "5002", "--single"]
+CMD ["serve", "-s", "dist/dss/browser", "-l", "5002"]
