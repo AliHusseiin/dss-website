@@ -1,0 +1,144 @@
+.main-about-container {
+    width: 100%;
+    height: 80%;
+    background: linear-gradient(to bottom, #1a1a1a, #141313 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 80%;
+    position: relative;  
+}
+
+.text-section {
+    background: linear-gradient(to bottom, #4d4d4d, #141313 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.image-section {
+    position: relative;
+    overflow: hidden;
+    background: #333;
+}
+
+.stats-overlay {
+    position: absolute;
+    top: 66%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 600px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) translateY(30px);
+    animation: delayedFadeIn 0.8s ease forwards;
+    animation-delay: 1s; 
+}
+
+@keyframes delayedFadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+.stats-overlay > * {
+    pointer-events: auto;
+}
+
+.text-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 20%,
+            rgba(255, 255, 255, 0.1) 80%,
+            transparent 100%);
+}
+
+@media (max-width: 991.98px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .text-section {
+        order: 1;
+        min-height: 60vh;
+        padding: 3rem 2rem;
+    }
+
+    .text-section::before {
+        display: none;
+    }
+
+    .image-section {
+        order: 2;
+        min-height: 50vh;
+    }
+
+    .stats-overlay {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        padding: 2rem;
+        margin-top: -4rem;
+        z-index: 15;
+        animation: delayedFadeInStatic 0.8s ease forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes delayedFadeInStatic {
+        from {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .main-about-container {
+        min-height: auto;
+    }
+
+    .text-section {
+        min-height: 50vh;
+        padding: 2rem 1rem;
+    }
+
+    .image-section {
+        min-height: 40vh;
+    }
+
+    .stats-overlay {
+        margin-top: -3rem;
+        padding: 1rem;
+    }
+} 

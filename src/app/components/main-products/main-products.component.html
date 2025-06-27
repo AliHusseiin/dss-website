@@ -1,0 +1,156 @@
+<!-- main-products.component.html -->
+<div class="main-products-container">
+  
+  <!-- Show product detail if ID is provided -->
+  <div *ngIf="showProductDetail && product" class="main-product">
+    <!-- Floating Geometric Background -->
+    <div class="geometric-bg">
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+    </div>
+
+    <!-- Hero Section with Split Layout -->
+    <section class="hero-section">
+      <div class="hero-left">
+        <div class="category-badge">{{ product.category }}</div>
+        <h1 class="hero-title">{{ product.title }}</h1>
+        <p class="hero-description">{{ product.longDescription }}</p>
+      </div>
+      <div class="hero-right">
+        <div class="product-showcase">
+          <div class="product-image-container">
+            <img [src]="product.image" [alt]="product.title" class="product-image" />
+            <div class="image-glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section with Horizontal Scroll -->
+    <section class="features-section">
+      <div class="features-header">
+        <h2 class="features-title">Key Features</h2>
+        <p class="features-subtitle">Discover what makes our {{ product.title.toLowerCase() }} industry-leading</p>
+      </div>
+      <div class="features-container">
+        <div class="features-track">
+          <div class="feature-card" *ngFor="let feature of product.features; let i = index">
+            <div class="feature-number">{{ getFormattedIndex(i) }}</div>
+            <h3 class="feature-title">{{ getFeatureTitle(feature) }}</h3>
+            <p class="feature-description">{{ getFeatureDescription(feature) }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Grid -->
+    <!-- <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">{{ product.stats?.uptime || '99.99%' }}</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ product.stats?.clients || '500+' }}</div>
+          <div class="stat-label">Enterprise Clients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ product.stats?.support || '24/7' }}</div>
+          <div class="stat-label">Support</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ product.roi || '40%' }}</div>
+          <div class="stat-label">Cost Reduction</div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Benefits Timeline -->
+    <section class="benefits-section">
+      <div class="benefits-container">
+        <div class="benefits-header">
+          <h2 class="benefits-title">Why Choose Our Solution?</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item" *ngFor="let benefit of product.benefits; let i = index">
+            <div class="timeline-content">
+              <h3 class="benefit-title">{{ getBenefitTitle(benefit, i) }}</h3>
+              <p class="benefit-description">{{ benefit }}</p>
+            </div>
+            <div class="timeline-marker"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies Grid -->
+    <section class="tech-section">
+      <div class="tech-header">
+        <h2 class="tech-title">Technologies We Use</h2>
+        <p class="features-subtitle">Built with cutting-edge enterprise-grade tools</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-badge" *ngFor="let tech of product.technologies">
+          {{ tech }}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Show your existing main products page if no ID -->
+  <div *ngIf="!showProductDetail" class="products-list">
+    <div class="existing-content">
+      <div class="hero-section">
+        <div class="hero-left">
+          <div class="category-badge">Product Catalog</div>
+          <h1 class="hero-title">All Products</h1>
+          <p class="hero-description">Explore our comprehensive suite of enterprise solutions designed to accelerate your digital transformation journey.</p>
+          <button class="modern-button" (click)="goBack()">
+            <span>Back to Home Products</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+        </div>
+        <div class="hero-right">
+          <div class="product-showcase">
+            <div class="product-image-container">
+              <img src="/assets/images/others/placeholder.svg" alt="All Products" class="product-image" />
+              <div class="image-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="showProductDetail && !product" class="error-state">
+    <div class="error-container">
+      <div class="error-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+      </div>
+      <h2>Product Not Found</h2>
+      <p>The enterprise solution you're looking for doesn't exist or has been moved.</p>
+      <button class="modern-button" (click)="goBack()">
+        <span>Back to Products</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Loading product details...</p>
+    </div>
+  </div>
+</div>

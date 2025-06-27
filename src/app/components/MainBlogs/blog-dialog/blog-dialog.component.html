@@ -1,0 +1,61 @@
+<div class="dialog-overlay" *ngIf="isOpen" (click)="onOverlayClick($event)">
+  <div class="dialog-content" *ngIf="post">
+    <!-- Close Button -->
+    <button class="close-button" (click)="close()">
+      <span class="close-icon">×</span>
+    </button>
+
+    <!-- Dialog Header -->
+    <div class="dialog-header">
+      <div class="header-image" [class]="post.imageClass"></div>
+      <div class="header-gradient"></div>
+      <div class="header-content">
+        <div class="dialog-meta">
+          <span class="category-tag">{{ post.category }}</span>
+          <span class="date">{{ post.date }}</span>
+          <span class="read-time">{{ getFullArticle()?.estimatedReadTime || post.readTime }}</span>
+        </div>
+        <h1 class="dialog-title">{{ post.title }}</h1>
+        <div class="author-section">
+          <div class="author-avatar-large"></div>
+          <div class="author-details">
+            <div class="author-name">{{ post.author }}</div>
+            <div class="author-role">Future Technology Analyst</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dialog Body -->
+    <div class="dialog-body">
+      <div class="article-content">
+        <!-- Article Excerpt -->
+        <!-- <div class="article-excerpt">
+          <p>{{ post.excerpt }}</p>
+        </div> -->
+
+        <!-- Full Article Content -->
+        <div class="article-text" *ngIf="getFullArticle()" [innerHTML]="getFullArticle().content">
+        </div>
+
+        <!-- Fallback content if no full article -->
+        <div class="article-text" *ngIf="!getFullArticle()">
+          <h2>Article Content</h2>
+          <p>This is where the full article content would be displayed. The article explores cutting-edge concepts and provides deep insights into future technology trends.</p>
+          
+          <h3>Key Insights</h3>
+          <p>{{ post.excerpt }}</p>
+          
+          <h3>Future Implications</h3>
+          <p>This technology represents a paradigm shift that will fundamentally transform how enterprises operate in the digital age. Organizations that embrace these innovations early will gain significant competitive advantages.</p>
+          
+          <h3>Implementation Strategy</h3>
+          <p>Success requires careful planning and gradual adoption. Companies should start with pilot programs to test the technology's viability within their specific context before scaling to enterprise-wide implementation.</p>
+        </div>
+      </div>
+
+
+      
+    </div>
+  </div>
+</div>

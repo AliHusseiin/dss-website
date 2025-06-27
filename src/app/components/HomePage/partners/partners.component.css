@@ -1,0 +1,106 @@
+.partner-container {
+    font-family: 'Montserrat';
+    color: #fff;
+    padding-top: 10rem;
+    background: linear-gradient(to bottom, #0e0d0d, #0f0e0e 100%);
+    text-align: center;
+
+}
+
+.partners-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.partners-subtitle {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.gallery {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    perspective: 2000px;
+}
+
+.scroll-container {
+    width: 100%;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    gap: 3rem;
+    padding: 2rem;
+    transform-style: preserve-3d;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0) transparent;
+}
+
+.cards {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+}
+
+.cards li {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    width: 250px;
+}
+
+.cards li img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+    box-shadow: 0 0 40px #1C1C80;
+    transition: transform 0.3s ease;
+    border: 3px solid rgba(30, 30, 30, 0.423); 
+}
+
+.cards li p {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    text-shadow: 0 0 8px #000;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.cards li small {
+    display: block;
+    font-weight: normal;
+    font-size: 0.75rem;
+}
+
+.scroll-container:has(.cards li:hover) .cards li:not(:hover) {
+    transform: rotateY(-15deg) scale(0.95);
+    filter: blur(2px) grayscale(0.6);
+}
+
+.cards li:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Optional: fade thumb on hover */
+.scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.336);
+    border-radius: 10px;
+    transition:  0.3s ease;
+}
+
+.scroll-container:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 110, 255, 0.5);
+}

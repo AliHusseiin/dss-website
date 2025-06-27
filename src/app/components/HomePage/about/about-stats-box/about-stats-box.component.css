@@ -1,0 +1,129 @@
+.stats-container {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 0;
+  transition: all 0.8s ease;
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  min-width: 700px;
+  max-width: 900px;
+  width: 85%;
+  padding: 1rem 2rem; /* Reduced vertical padding */
+  height: auto;
+  min-height: 80px; /* Reduced height */
+}
+
+.stats-container.animate {
+  opacity: 1;
+  transform: translateY(0);
+
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-value {
+  font-size: clamp(1rem, 2vw, 2rem); /* Increased size */
+  color: white;
+  margin-bottom: 0.25rem;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem); /* Increased size */
+  opacity: 0.9;
+  font-weight: 400;
+  white-space: nowrap; /* Keep text on same line */
+  line-height: 1.2;
+}
+
+.stat-divider {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.3);
+  user-select: none;
+  align-self: center;
+}
+
+/* Desktop positioning */
+@media (min-width: 992px) {
+  .stats-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 800px;
+    max-width: 1000px;
+    padding: 1rem 2.5rem; /* Reduced vertical padding */
+    gap: 3.5rem;
+  }
+
+  .stats-container.animate {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Tablet styles */
+@media (max-width: 991.98px) {
+  .stats-container {
+    margin: 2rem auto;
+    max-width: 600px;
+    min-width: 500px;
+    gap: 2rem;
+    padding: 1rem 1.5rem; /* Reduced vertical padding */
+  }
+
+  .stat-divider {
+    display: none;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 576px) {
+  .stats-container {
+    flex-direction: row; /* Keep horizontal on mobile */
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1.5rem auto;
+    min-width: 320px;
+    max-width: 95%;
+    height: auto;
+    min-height: 70px;
+  }
+
+  .stat-item {
+    width: auto;
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: clamp(1.2rem, 4vw, 1rem);
+  }
+
+  .stat-label {
+    font-size: clamp(0.7rem, 2.5vw, 0.7rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+}

@@ -1,0 +1,80 @@
+<!-- Animated Background -->
+<div class="bg-animation">
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="floating-orb orb3"></div>
+</div>
+
+<!-- Neural Network Lines -->
+<div class="neural-network" id="neuralNetwork"></div>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <h1 class="hero-title">FUTURE<br>INSIGHTS</h1>
+      <p class="hero-subtitle">
+        Dive into the neural network of tomorrow's enterprise solutions. 
+        Experience cutting-edge perspectives that reshape reality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="blog-section" id="blog">
+    <div class="blog-container">
+      
+      <!-- Filter Tabs -->
+      <div class="filter-container">
+        <div 
+          *ngFor="let tab of filterTabs"
+          class="filter-tab"
+          [class.active]="activeFilter === tab"
+          (click)="setActiveFilter(tab)">
+          {{ tab }}
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="blog-grid">
+        <!-- Blog Articles -->
+        <article 
+          *ngFor="let post of blogPosts; let i = index"
+          class="blog-card"
+          [class.featured-card]="post.isFeatured"
+          [style.animation-delay]="(i * 0.1) + 's'"
+          (click)="onCardClick(post)">
+                    
+          <!-- Regular Card Content -->
+          <div class="card-image" [class]="post.imageClass"></div>
+          <div class="card-content">
+            <div class="card-meta">
+              <span class="category-tag">{{ post.category }}</span>
+              <span>•</span>
+              <span>{{ post.date }}</span>
+            </div>
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-excerpt">{{ post.excerpt }}</p>
+            <div class="card-footer">
+              <div class="author-info">
+                <div class="author-avatar"></div>
+                <span class="author-name">{{ post.author }}</span>
+              </div>
+              <span class="read-time">{{ post.readTime }}</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Blog Dialog Component -->
+<app-blog-dialog 
+  [post]="selectedPost" 
+  [isOpen]="isDialogOpen" 
+  (closeDialog)="onDialogClose()">
+</app-blog-dialog>
+
+<br><br><br>

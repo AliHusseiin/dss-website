@@ -1,0 +1,86 @@
+<!-- floating-buttons.component.html -->
+<div class="floating-buttons">
+  <!-- Chatbot Button -->
+  <button class="fab fab-chatbot" (click)="openBot()">
+    <svg class="fab-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12,2A2,2 0 0,1 14,4V6H16A4,4 0 0,1 20,10V16A4,4 0 0,1 16,20H8A4,4 0 0,1 4,16V10A4,4 0 0,1 8,6H10V4A2,2 0 0,1 12,2M8.5,9A1.5,1.5 0 0,0 7,10.5A1.5,1.5 0 0,0 8.5,12A1.5,1.5 0 0,0 10,10.5A1.5,1.5 0 0,0 8.5,9M15.5,9A1.5,1.5 0 0,0 14,10.5A1.5,1.5 0 0,0 15.5,12A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 15.5,9M8,14C8,15.11 9.34,16 12,16C14.66,16 16,15.11 16,14H8Z"/>
+    </svg>    
+  </button>
+
+  <!-- Contact Button -->
+  <button
+    class="fab fab-contact"
+    aria-label="Contact us"
+    (click)="openContactDialog()"
+    title="Contact us"
+  >
+    <!-- Contact/Message SVG icon -->
+    <svg class="fab-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Contact Dialog -->
+<div class="dialog-overlay" *ngIf="showContactDialog" (click)="closeContactDialog()">
+  <div class="dialog-container" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3>Contact Us</h3>
+      <button class="close-btn" (click)="closeContactDialog()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    
+    <form class="contact-form" (ngSubmit)="submitContactForm()" #contactForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="contactData.name"
+          required
+          placeholder="Enter your full name"
+          class="form-input"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="contactData.email"
+          required
+          placeholder="Enter your email address"
+          class="form-input"
+        >
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          [(ngModel)]="contactData.message"
+          required
+          placeholder="Enter your message"
+          class="form-textarea"
+          rows="4"
+        ></textarea>
+      </div>
+      
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeContactDialog()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid || isSubmitting">
+          {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

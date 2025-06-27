@@ -1,0 +1,205 @@
+.main {
+  background: linear-gradient(to bottom, rgb(22, 20, 20), #0e0d0d 100%);
+  color: white;
+  font-family: 'Montserrat';
+  text-align: center;
+  padding: 50px 5% 100px;
+  min-height: 100%;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.section-subtitle {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background-color: #232396;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(40%);
+  transition: filter 0.4s ease-in-out;
+}
+
+.service-card:hover img {
+  filter: brightness(100%);
+}
+
+.service-content {
+  padding: 1rem;
+}
+
+.service-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-desc {
+  font-size: 0.85rem;
+  color: #cfd1d5;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.button {
+  position: relative;
+  width: 9.375rem;
+  height: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #1C1C80;
+  background-color: #232396;
+  border-radius: 0.2rem;
+  transition: all 0.3s;
+  transform: translateY(30px); 
+  animation: titleSlide 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+
+.button__text {
+  transform: translateX(0.625rem);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  flex: 1;
+  text-align: left;
+  transition: all 0.3s;
+}
+
+.button__icon {
+  position: absolute;
+  transform: translateX(6.6875rem);
+  height: 100%;
+  width: 2.25rem;
+  border-radius: 0.2rem;
+  background-color: #1C1C80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background: #1C1C80;
+}
+
+.button:hover {
+  color: transparent;
+}
+
+/* .button:hover .button__icon {
+  width: 5rem;
+  transform: translateX(0);
+} */
+
+.button:active .button__icon {
+  background-color: #0000cc;
+}
+
+.button:active {
+  border: 1px solid #0000cc;
+}
+.no-underline {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+/* Base styles (desktop-first) */
+.logo-container {
+  position: relative;
+  width: 30rem;           /* ≈480 px on most browsers */
+  max-width: 100%;        /* never overflow its parent */
+  height: auto;
+  display: inline-block;
+}
+
+/* Tablets (portrait ≤ 1024 px) */
+@media (max-width: 64em) {   /* 64 em ≈ 1024 px */
+  .logo-container {
+    width: 22rem;         /* scale down a bit */
+  }
+}
+
+/* Large phones / small tablets (≤ 768 px) */
+@media (max-width: 48em) {   /* 48 em ≈ 768 px */
+  .logo-container {
+    width: 18rem;
+  }
+}
+
+/* Phones (≤ 480 px) */
+@media (max-width: 30em) {   /* 30 em ≈ 480 px */
+  .logo-container {
+    width: 70%;           /* fluid width, stays centered */
+  }
+}
+
+.logo {
+  width: 100%;
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.normal-logo {
+  opacity: 1;
+  z-index: 2;
+}
+
+.hover-logo {
+  opacity: 0;
+  z-index: 1;
+}
+
+.logo-container:hover .normal-logo {
+  opacity: 0;
+}
+
+.logo-container:hover .hover-logo {
+  opacity: 1;
+}
+/* ------------------------------------------------------------------------------ */
+
+
