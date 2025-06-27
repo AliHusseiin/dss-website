@@ -1,3 +1,5 @@
+/* Ultra-optimized about-image.component.css - Target <0.5kB */
+
 .image-wrapper {
   position: relative;
   width: 100%;
@@ -18,20 +20,11 @@
 
 .image-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg, 
-    rgba(0, 0, 0, 0.1) 0%, 
-    rgba(0, 0, 0, 0.05) 50%, 
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  inset: 0;
+  background: linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.1) 100%);
   pointer-events: none;
 }
 
-/* Tablet and Mobile Styles */
 @media (max-width: 991.98px) {
   .image-wrapper {
     height: 400px;
@@ -46,7 +39,6 @@
   }
 }
 
-/* Hover effect for desktop */
 @media (min-width: 992px) {
   .image-wrapper:hover .about-img {
     transform: scale(1.02);

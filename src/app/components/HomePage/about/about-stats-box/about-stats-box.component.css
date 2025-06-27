@@ -1,6 +1,7 @@
+/* Ultra-optimized about-stats-box.component.css - Target <1kB */
+
 .stats-container {
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
@@ -11,22 +12,21 @@
   transition: all 0.8s ease;
   position: relative;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
   gap: 4rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
   min-width: 700px;
   max-width: 900px;
   width: 85%;
-  padding: 1rem 2rem; /* Reduced vertical padding */
+  padding: 1rem 2rem;
   height: auto;
-  min-height: 80px; /* Reduced height */
+  min-height: 80px;
 }
 
 .stats-container.animate {
   opacity: 1;
   transform: translateY(0);
-
 }
 
 .stat-item {
@@ -40,28 +40,27 @@
 }
 
 .stat-value {
-  font-size: clamp(1rem, 2vw, 2rem); /* Increased size */
+  font-size: clamp(1rem, 2vw, 2rem);
   color: white;
   margin-bottom: 0.25rem;
   line-height: 1.1;
 }
 
 .stat-label {
-  font-size: clamp(0.8rem, 1.2vw, 0.95rem); /* Increased size */
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   opacity: 0.9;
   font-weight: 400;
-  white-space: nowrap; /* Keep text on same line */
+  white-space: nowrap;
   line-height: 1.2;
 }
 
 .stat-divider {
   font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255,255,255,0.3);
   user-select: none;
   align-self: center;
 }
 
-/* Desktop positioning */
 @media (min-width: 992px) {
   .stats-container {
     position: absolute;
@@ -70,7 +69,7 @@
     transform: translate(-50%, -50%);
     min-width: 800px;
     max-width: 1000px;
-    padding: 1rem 2.5rem; /* Reduced vertical padding */
+    padding: 1rem 2.5rem;
     gap: 3.5rem;
   }
 
@@ -79,14 +78,13 @@
   }
 }
 
-/* Tablet styles */
 @media (max-width: 991.98px) {
   .stats-container {
     margin: 2rem auto;
     max-width: 600px;
     min-width: 500px;
     gap: 2rem;
-    padding: 1rem 1.5rem; /* Reduced vertical padding */
+    padding: 1rem 1.5rem;
   }
 
   .stat-divider {
@@ -94,10 +92,9 @@
   }
 }
 
-/* Mobile styles */
 @media (max-width: 576px) {
   .stats-container {
-    flex-direction: row; /* Keep horizontal on mobile */
+    flex-direction: row;
     gap: 1rem;
     padding: 1rem;
     margin: 1.5rem auto;

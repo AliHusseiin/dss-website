@@ -1,7 +1,15 @@
-// product.component.ts
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+// Fixed product.component.ts
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
 
 @Component({
   selector: 'app-product',
@@ -10,14 +18,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
-export class ProductComponent implements AfterViewInit {
+export class ProductComponent implements AfterViewInit, OnDestroy {
   
-  @ViewChild('productsGrid', { static: false }) productsGrid!: ElementRef;
+  @ViewChild('productsGrid', { static: false }) productsGrid!: ElementRef<HTMLElement>;
   
   canScrollLeft = false;
   canScrollRight = true;
   
-  products = [
+  private readonly SCROLL_AMOUNT = 420; // Card width + gap
+  
+  readonly products: Product[] = [
     {
       id: 1,
       title: 'Cloud Solutions',
@@ -55,48 +65,73 @@ export class ProductComponent implements AfterViewInit {
     }
   ];
 
-  constructor(private router: Router) {}
+  private resizeObserver?: ResizeObserver;
 
-  ngAfterViewInit() {
-    // Initial check for scroll indicators
-    setTimeout(() => {
-      this.updateScrollIndicators();
-    }, 100);
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  ngAfterViewInit(): void {
+    // Only run browser-specific code in the browser
+    if (isPlatformBrowser(this.platformId)) {
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        this.updateScrollIndicators();
+        this.setupResizeObserver();
+      });
+    }
   }
 
-  navigateToProduct(productId: number) {
-    console.log('Navigating to product:', productId);
-    this.router.navigate(['/mainproducts', productId]).then(
-      (success) => console.log('Navigation success:', success),
-      (error) => console.error('Navigation error:', error)
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.resizeObserver?.disconnect();
+    }
+  }
+
+  navigateToProduct(productId: number): void {
+    this.router.navigate(['/mainproducts', productId]).catch(
+      error => console.error('Navigation error:', error)
     );
   }
 
-  trackByProductId(index: number, product: any): number {
+  trackByProductId(index: number, product: Product): number {
     return product.id;
   }
 
-  scrollLeft() {
-    const container = this.productsGrid.nativeElement;
-    const scrollAmount = 420; // Card width + gap (400px + 20px)
-    container.scrollBy({
-      left: -scrollAmount,
-      behavior: 'smooth'
-    });
+  scrollLeft(): void {
+    if (isPlatformBrowser(this.platformId) && this.productsGrid) {
+      this.productsGrid.nativeElement.scrollBy({
+        left: -this.SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    }
   }
 
-  scrollRight() {
-    const container = this.productsGrid.nativeElement;
-    const scrollAmount = 420; // Card width + gap (400px + 20px)
-    container.scrollBy({
-      left: scrollAmount,
-      behavior: 'smooth'
-    });
+  scrollRight(): void {
+    if (isPlatformBrowser(this.platformId) && this.productsGrid) {
+      this.productsGrid.nativeElement.scrollBy({
+        left: this.SCROLL_AMOUNT,
+        behavior: 'smooth'
+      });
+    }
   }
 
-  updateScrollIndicators() {
-    const container = this.productsGrid.nativeElement;
-    this.canScrollLeft = container.scrollLeft > 0;
-    this.canScrollRight = container.scrollLeft < (container.scrollWidth - container.clientWidth);
+  updateScrollIndicators(): void {
+    if (isPlatformBrowser(this.platformId) && this.productsGrid) {
+      const container = this.productsGrid.nativeElement;
+      this.canScrollLeft = container.scrollLeft > 0;
+      this.canScrollRight = container.scrollLeft < (container.scrollWidth - container.clientWidth);
+    }
+  }
+
+  private setupResizeObserver(): void {
+    if (isPlatformBrowser(this.platformId) && this.productsGrid) {
+      // Update scroll indicators on resize
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateScrollIndicators();
+      });
+      this.resizeObserver.observe(this.productsGrid.nativeElement);
+    }
   }
 }

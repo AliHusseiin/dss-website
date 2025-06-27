@@ -1,16 +1,26 @@
+// Fixed main-about-us.component.ts
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { 
+  AfterViewInit, 
+  Component, 
+  ElementRef, 
+  Inject, 
+  OnDestroy, 
+  OnInit, 
+  PLATFORM_ID, 
+  ViewChild 
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 interface ServiceItem {
-  title: string;
-  description: string;
-  image: string;
+  readonly title: string;
+  readonly description: string;
+  readonly image: string;
 }
 
 interface StatItem {
-  number: string;
-  label: string;
+  readonly number: string;
+  readonly label: string;
 }
 
 @Component({
@@ -21,15 +31,14 @@ interface StatItem {
   styleUrl: './main-about-us.component.css'
 })
 export class MainAboutUsComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('cosmicBg', { static: true }) cosmicBg!: ElementRef;
-  @ViewChild('mouseGlow', { static: true }) mouseGlow!: ElementRef;
+  @ViewChild('cosmicBg', { static: true }) cosmicBg!: ElementRef<HTMLElement>;
+  @ViewChild('mouseGlow', { static: true }) mouseGlow!: ElementRef<HTMLElement>;
 
-  private mouseMoveListener!: (e: MouseEvent) => void;
-  private clickListener!: (e: MouseEvent) => void;
+  private mouseMoveListener?: (e: MouseEvent) => void;
+  private clickListener?: (e: MouseEvent) => void;
+  private isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-
-  services: ServiceItem[] = [
+  readonly services: ServiceItem[] = [
     {
       title: 'Artificial Intelligence',
       description: 'Revolutionary AI systems that think, learn, and evolve. Neural networks and machine learning algorithms that create intelligent solutions for complex challenges.',
@@ -52,92 +61,112 @@ export class MainAboutUsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   ];
 
-  getServiceIcon(index: number): string {
-    const icons = ['🧠', '⚡', '🔧', '🔗'];
-    return icons[index] || '🔧';
-  }
-
-  getServiceTags(index: number): string[] {
-    const tags = [
-      ['ML', 'Neural Networks', 'AI'],
-      ['IoT', 'Microcontrollers', 'Hardware'],
-      ['Cloud', 'Scalability', 'APIs'],
-      ['Networks', 'Optimization', 'Systems']
-    ];
-    return tags[index] || [];
-  }
-
-  stats: StatItem[] = [
+  readonly stats: StatItem[] = [
     { number: '15+', label: 'Years of<br>Innovation' },
     { number: '200+', label: 'Solutions<br>Delivered' },
     { number: '50+', label: 'Enterprise<br>Partners' },
     { number: '99.9%', label: 'System<br>Reliability' }
   ];
 
+  private readonly serviceTags: readonly string[][] = [
+    ['ML', 'Neural Networks', 'AI'],
+    ['IoT', 'Microcontrollers', 'Hardware'],
+    ['Cloud', 'Scalability', 'APIs'],
+    ['Networks', 'Optimization', 'Systems']
+  ];
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   ngOnInit(): void {
-    // Component initialization
+    // Component initialization - runs on both server and client
   }
 
   ngAfterViewInit(): void {
-    // Only run browser-specific code if we're in the browser
-    if (isPlatformBrowser(this.platformId)) {
-      this.initMouseGlow();
-      this.initRippleEffect();
+    // Only run browser-specific code in the browser
+    if (this.isBrowser) {
+      // Use setTimeout as fallback for SSR compatibility
+      setTimeout(() => {
+        this.initMouseGlow();
+        this.initRippleEffect();
+      }, 0);
     }
   }
 
   ngOnDestroy(): void {
-    // Only clean up event listeners if we're in the browser
-    if (isPlatformBrowser(this.platformId)) {
-      if (this.mouseMoveListener) {
-        document.removeEventListener('mousemove', this.mouseMoveListener);
-      }
-      if (this.clickListener) {
-        document.removeEventListener('click', this.clickListener);
-      }
+    if (this.isBrowser) {
+      this.cleanup();
     }
   }
 
-  private initMouseGlow(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    const mouseGlow = this.mouseGlow.nativeElement;
-    
-    this.mouseMoveListener = (e: MouseEvent) => {
-      mouseGlow.style.left = (e.clientX - 150) + 'px';
-      mouseGlow.style.top = (e.clientY - 150) + 'px';
-    };
-    
-    document.addEventListener('mousemove', this.mouseMoveListener);
-  }
-
-  private initRippleEffect(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    
-    this.clickListener = (e: MouseEvent) => {
-      const ripple = document.createElement('div');
-      ripple.className = 'ripple';
-      ripple.style.left = (e.clientX - 60) + 'px';
-      ripple.style.top = (e.clientY - 60) + 'px';
-      document.body.appendChild(ripple);
-
-      setTimeout(() => {
-        ripple.remove();
-      }, 1000);
-    };
-    
-    document.addEventListener('click', this.clickListener);
+  getServiceTags(index: number): readonly string[] {
+    return this.serviceTags[index] || [];
   }
 
   onServiceHover(event: MouseEvent, isEntering: boolean): void {
+    // Only run in browser
+    if (!this.isBrowser) return;
+    
     const target = event.currentTarget as HTMLElement;
     
     if (isEntering) {
       target.style.zIndex = '20';
     } else {
+      // Delay reset to allow smooth transition
       setTimeout(() => {
         target.style.zIndex = '10';
       }, 300);
+    }
+  }
+
+  private initMouseGlow(): void {
+    if (!this.isBrowser || !this.mouseGlow) return;
+    
+    const mouseGlow = this.mouseGlow.nativeElement;
+    
+    this.mouseMoveListener = (e: MouseEvent) => {
+      const x = e.clientX - 150;
+      const y = e.clientY - 150;
+      mouseGlow.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    
+    document.addEventListener('mousemove', this.mouseMoveListener, { passive: true });
+  }
+
+  private initRippleEffect(): void {
+    if (!this.isBrowser) return;
+    
+    this.clickListener = (e: MouseEvent) => {
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = `${e.clientX - 60}px`;
+      ripple.style.top = `${e.clientY - 60}px`;
+      
+      document.body.appendChild(ripple);
+
+      // Clean up ripple element
+      setTimeout(() => {
+        if (ripple.parentNode) {
+          ripple.parentNode.removeChild(ripple);
+        }
+      }, 1000);
+    };
+    
+    document.addEventListener('click', this.clickListener, { passive: true });
+  }
+
+  private cleanup(): void {
+    if (!this.isBrowser) return;
+    
+    if (this.mouseMoveListener) {
+      document.removeEventListener('mousemove', this.mouseMoveListener);
+      this.mouseMoveListener = undefined;
+    }
+    
+    if (this.clickListener) {
+      document.removeEventListener('click', this.clickListener);
+      this.clickListener = undefined;
     }
   }
 }
