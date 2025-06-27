@@ -1,52 +1,55 @@
-<!-- main-about-us.component.html -->
+<!-- Optimized main-about-us.component.html -->
 <div class="cosmic-bg" #cosmicBg></div>
 <div class="mouse-glow" #mouseGlow></div>
 
 <div class="container">
-    <!-- Header Section -->
-    <header class="header">
-        <h1 class="company-name">DEEP INNOVATION</h1>
-         <!-- <img src="/assets/images/logos/lightLogo.svg" style="width:50%;opacity:0.5;" /> -->
-        <!-- <p class="tagline">ENGINEERING THE FUTURE, ONE SYSTEM AT A TIME</p> -->
-    </header>
-<section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-hexagon" 
-                 *ngFor="let stat of stats; let i = index" 
-                 [style.animation-delay.s]="(i + 1) * 0.2">
-                <div class="stat-content">
-                    <div class="stat-number">{{ stat.number }}</div>
-                    <div class="stat-label" [innerHTML]="stat.label"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Services Section -->
-    <section class="services-container">
-        <div class="services-wrapper">
-            <div class="service-item" 
-                 *ngFor="let service of services; let i = index"
-                 [style.animation-delay.s]="(i + 1) * 0.2"
-                 (mouseenter)="onServiceHover($event, true)"
-                 (mouseleave)="onServiceHover($event, false)">
-                <div class="service-number">{{ i + 1 }}</div>
-                <div class="service-layout">
-                    <div class="service-content">
-                        <h3 class="service-title">{{ service.title }}</h3>
-                        <p class="service-description">{{ service.description }}</p>
-                        <div class="service-tags">
-                            <span class="service-tag" *ngFor="let tag of getServiceTags(i)">{{ tag }}</span>
-                        </div>
-                    </div>
-                    <div class="service-image-container">
-                        <img [src]="service.image" [alt]="service.title" class="service-image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Header Section -->
+  <header class="header">
+    <h1 class="company-name">DEEP INNOVATION</h1>
+    <!-- Uncomment if needed:
+    <img src="/assets/images/logos/lightLogo.svg" style="width:50%;opacity:0.5;" alt="Company Logo">
+    <p class="tagline">ENGINEERING THE FUTURE, ONE SYSTEM AT A TIME</p>
+    -->
+  </header>
 
-    <!-- Stats Section -->
-    
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div 
+        class="stat-hexagon" 
+        *ngFor="let stat of stats; let i = index" 
+        [style.animation-delay.s]="(i + 1) * 0.2">
+        <div class="stat-content">
+          <div class="stat-number">{{ stat.number }}</div>
+          <div class="stat-label" [innerHTML]="stat.label"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Services Section -->
+  <section class="services-container">
+    <div class="services-wrapper">
+      <div 
+        class="service-item" 
+        *ngFor="let service of services; let i = index"
+        [style.animation-delay.s]="(i + 1) * 0.2"
+        (mouseenter)="onServiceHover($event, true)"
+        (mouseleave)="onServiceHover($event, false)">
+        <div class="service-number">{{ i + 1 }}</div>
+        <div class="service-layout">
+          <div class="service-content">
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-description">{{ service.description }}</p>
+            <div class="service-tags">
+              <span class="service-tag" *ngFor="let tag of getServiceTags(i)">{{ tag }}</span>
+            </div>
+          </div>
+          <div class="service-image-container">
+            <img [src]="service.image" [alt]="service.title" class="service-image" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

@@ -1,16 +1,16 @@
-/* product.component.css */
+/* Ultra-optimized product.component.css - Target <1.5kB */
+
 .our-products {
-    background: linear-gradient(to bottom,#191718, #161415 100%);
+  background: linear-gradient(to bottom, #191718, #161415);
   color: #fff;
   padding: 6rem 2rem;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -25,11 +25,10 @@
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  background: linear-gradient(135deg, #fff, #ccc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
 }
 
 .section-description {
@@ -38,7 +37,6 @@
   line-height: 1.6;
   max-width: 600px;
   margin: 0 auto;
-  font-weight: 400;
 }
 
 .products-scroll-container {
@@ -50,15 +48,12 @@
   display: flex;
   gap: 2.5rem;
   overflow-x: auto;
-  overflow-y: visible;
   padding: 2rem 1rem;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Hide scrollbar for WebKit browsers */
 .products-grid::-webkit-scrollbar {
   display: none;
 }
@@ -66,7 +61,7 @@
 .product-card {
   flex: 0 0 400px;
   cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s ease;
 }
 
 .product-card:hover {
@@ -78,33 +73,14 @@
   height: 550px;
   border-radius: 16px;
   background: linear-gradient(145deg, #1a1a1a, #0e0e0e);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
 }
 
 .product-card:hover .card-inner {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.card-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.product-card:hover .card-glow {
-  opacity: 1;
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .card-front {
@@ -126,9 +102,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.4s ease;
-  filter: brightness(0.9) contrast(1.1);
+  transition: transform 0.3s ease;
 }
 
 .product-card:hover .card-image img {
@@ -137,11 +111,8 @@
 
 .image-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
 }
 
 .card-content {
@@ -158,7 +129,6 @@
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
 }
 
 .card-title {
@@ -167,7 +137,6 @@
   color: #fff;
   margin: 0;
   line-height: 1.3;
-  letter-spacing: -0.01em;
 }
 
 .card-description {
@@ -176,7 +145,6 @@
   line-height: 1.6;
   flex-grow: 1;
   margin: 0;
-  font-weight: 400;
 }
 
 .discover-button {
@@ -184,60 +152,38 @@
   align-items: center;
   gap: 0.75rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255,255,255,0.3);
   color: white;
   padding: 0.875rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   border-radius: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
+  font-family: inherit;
   align-self: flex-start;
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-}
-
-.discover-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.discover-button:hover::before {
-  left: 100%;
 }
 
 .discover-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .button-icon {
   transition: transform 0.3s ease;
-  display: flex;
-  align-items: center;
 }
 
 .discover-button:hover .button-icon {
   transform: translateX(4px);
 }
 
-/* Scroll indicators */
 .scroll-indicator {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
   border-radius: 50%;
   width: 48px;
@@ -248,147 +194,43 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
-  backdrop-filter: blur(10px);
 }
 
 .scroll-indicator:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
   transform: translateY(-50%) scale(1.1);
 }
 
-.scroll-left {
-  left: -24px;
-}
-
-.scroll-right {
-  right: -24px;
-}
+.scroll-left { left: -24px; }
+.scroll-right { right: -24px; }
 
 .scroll-indicator svg {
   width: 20px;
   height: 20px;
 }
 
-.dss-section {
-  text-align: center;
-  padding: 3rem 0;
-  position: relative;
-}
+.opacity-30 { opacity: 0.3; }
+.opacity-100 { opacity: 1; }
 
-.dss-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-}
-
-.dss-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.dss-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.01em;
-}
-
-.dss-divider {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #ffffff, transparent);
-  margin: 0 auto 2rem;
-  border-radius: 2px;
-}
-
-.dss-description {
-  font-size: 1rem;
-  color: #ccc;
-  line-height: 1.8;
-  font-weight: 400;
-  margin: 0;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-  .our-products {
-    padding: 4rem 1rem;
-  }
-  
-  .products-grid {
-    padding: 1rem 0.5rem;
-    gap: 1.5rem;
-  }
-  
-  .product-card {
-    flex: 0 0 350px;
-  }
-  
-  .card-inner {
-    height: 380px;
-  }
-  
-  .card-content {
-    padding: 1.5rem;
-  }
-  
-  .section-title {
-    font-size: 2.5rem;
-  }
-  
-  .dss-title {
-    font-size: 1.8rem;
-  }
-  
-  .scroll-indicator {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .scroll-indicator svg {
-    width: 16px;
-    height: 16px;
-  }
+  .our-products { padding: 4rem 1rem; }
+  .products-grid { padding: 1rem 0.5rem; gap: 1.5rem; }
+  .product-card { flex: 0 0 350px; }
+  .card-inner { height: 380px; }
+  .card-content { padding: 1.5rem; }
+  .section-title { font-size: 2.5rem; }
+  .scroll-indicator { width: 40px; height: 40px; }
+  .scroll-indicator svg { width: 16px; height: 16px; }
 }
 
 @media (max-width: 480px) {
-  .product-card {
-    flex: 0 0 320px;
-  }
-  
-  .card-inner {
-    height: 360px;
-  }
-  
-  .card-content {
-    padding: 1.25rem;
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-  }
-  
-  .card-description {
-    font-size: 0.9rem;
-  }
-  
-  .products-grid {
-    padding: 1rem 0.25rem;
-  }
-  
-  .scroll-left {
-    left: -20px;
-  }
-  
-  .scroll-right {
-    right: -20px;
-  }
+  .product-card { flex: 0 0 320px; }
+  .card-inner { height: 360px; }
+  .card-content { padding: 1.25rem; }
+  .card-title { font-size: 1.2rem; }
+  .card-description { font-size: 0.9rem; }
+  .products-grid { padding: 1rem 0.25rem; }
+  .scroll-left { left: -20px; }
+  .scroll-right { right: -20px; }
 }

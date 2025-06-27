@@ -1,23 +1,31 @@
-<!-- product.component.html -->
+<!-- Optimized product.component.html -->
 <section class="our-products">
   <div class="container">
     <div class="header-section">
       <h2 class="section-title">Our Products</h2>
       <p class="section-description">
-        Products that push boundaries and redefine potential<br />
+        Products that push boundaries and redefine potential<br>
         Shaping the future, one project at a time.
       </p>
     </div>
 
     <div class="products-scroll-container">
       <!-- Scroll indicators -->
-      <button class="scroll-indicator scroll-left" (click)="scrollLeft()" [style.opacity]="canScrollLeft ? '1' : '0.3'">
+      <button 
+        class="scroll-indicator scroll-left" 
+        (click)="scrollLeft()" 
+        [style.opacity]="canScrollLeft ? '1' : '0.3'"
+        aria-label="Scroll left">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 18l-6-6 6-6"/>
         </svg>
       </button>
       
-      <button class="scroll-indicator scroll-right" (click)="scrollRight()" [style.opacity]="canScrollRight ? '1' : '0.3'">
+      <button 
+        class="scroll-indicator scroll-right" 
+        (click)="scrollRight()" 
+        [style.opacity]="canScrollRight ? '1' : '0.3'"
+        aria-label="Scroll right">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 18l6-6-6-6"/>
         </svg>
@@ -27,19 +35,18 @@
         <div 
           class="product-card" 
           *ngFor="let product of products; trackBy: trackByProductId"
-          (click)="navigateToProduct(product.id)"
-        >
+          (click)="navigateToProduct(product.id)">
           <div class="card-inner">
             <div class="card-front">
               <div class="card-image">
-                <img [src]="product.image" [alt]="product.title" />
+                <img [src]="product.image" [alt]="product.title" loading="lazy">
                 <div class="image-overlay"></div>
               </div>
               <div class="card-content">
                 <span class="card-category">{{ product.category }}</span>
                 <h3 class="card-title">{{ product.title }}</h3>
                 <p class="card-description">{{ product.description }}</p>
-                <button class="discover-button">
+                <button class="discover-button" type="button">
                   <span>Discover More</span>
                   <div class="button-icon">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -49,23 +56,9 @@
                 </button>
               </div>
             </div>
-            <div class="card-glow"></div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- <div class="dss-section">
-      <div class="dss-content">
-        <h2 class="dss-title">DSS Systems</h2>
-        <div class="dss-divider"></div>
-        <p class="dss-description">
-          A subsidiary of Defined Solutions, specializes in professional and managed IT services, focusing on
-          partnerships with vendors, partners, and distributors in the KSA and Gulf area. We provide expert 
-          consultancy and support, tailoring high-quality IT solutions to the unique needs of our clients 
-          through close collaboration and a deep understanding of their business challenges.
-        </p>
-      </div>
-    </div> -->
   </div>
 </section>
