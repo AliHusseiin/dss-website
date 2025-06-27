@@ -17,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Build the Angular app for production
-RUN npm run build 
+RUN npm run build -- --optimization-fonts=false
 # --configuration production
 
 # Serve the app using serve on port 5002
