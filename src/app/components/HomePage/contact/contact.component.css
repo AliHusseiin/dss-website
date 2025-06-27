@@ -125,13 +125,13 @@
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  width: 280px;
+  width: 350px;
   flex-shrink: 0;
 }
 
 .card:nth-child(1) {
   transform: translateX(-100vw);
-  animation: slideInFromLeft 1.2s ease-out 1.2s forwards;
+  animation: slideInUp 0.8s ease-out 0.8s forwards;
 }
 
 .card:nth-child(2) {
@@ -141,7 +141,7 @@
 
 .card:nth-child(3) {
   transform: translateX(100vw);
-  animation: slideInFromRight 1.2s ease-out 1.2s forwards;
+  animation: slideInUp 0.8s ease-out 0.8s forwards;
 }
 
 .card::before {
@@ -516,4 +516,8 @@
   .newsletter-form input {
     min-width: unset;
   }
+}
+.mail-card a {
+  text-decoration: none;
+  color: inherit; /* Keeps the text color same as surrounding text */
 }
