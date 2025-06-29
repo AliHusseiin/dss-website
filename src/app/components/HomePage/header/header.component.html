@@ -1,8 +1,8 @@
-<!-- UPDATED NAVIGATION HTML -->
+<!-- HYBRID NAVIGATION HTML -->
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid px-4">
-    <!-- Logo - Removed href -->
-    <a class="navbar-brand nav-link" (click)="scrollToSection('hero', $event)" style="cursor: pointer;">
+    <!-- Logo -->
+    <a class="navbar-brand nav-link" [routerLink]="['/']" fragment="hero" style="cursor: pointer;">
       <img src="/assets/images/logos/logo1.svg" alt="Logo" class="logo-img">
     </a>
 
@@ -12,26 +12,26 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Navigation Links - Removed href attributes -->
+    <!-- Navigation Links - Using routerLink with fragments -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto nav-links">
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('hero', $event)" style="cursor: pointer;">Home</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="home" style="cursor: pointer;">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('about', $event)" style="cursor: pointer;">About Us</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="about" style="cursor: pointer;">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('blogs', $event)" style="cursor: pointer;">Blogs</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="products" style="cursor: pointer;">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('products', $event)" style="cursor: pointer;">Products</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="services" style="cursor: pointer;">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('services', $event)" style="cursor: pointer;">Services</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="blogs" style="cursor: pointer;">Blogs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="scrollToSection('contact', $event)" style="cursor: pointer;">Contact Us</a>
+          <a class="nav-link" [routerLink]="['/']" fragment="contact" style="cursor: pointer;">Contact Us</a>
         </li>
       </ul>
     </div>

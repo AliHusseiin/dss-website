@@ -3,7 +3,7 @@
 .our-products {
   background: linear-gradient(to bottom, #191718, #161415);
   color: #fff;
-  padding: 6rem 2rem;
+  padding: 2rem 0rem;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
   position: relative;
@@ -22,7 +22,7 @@
 }
 
 .section-title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 2rem);
   font-weight: 700;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, #fff, #ccc);
