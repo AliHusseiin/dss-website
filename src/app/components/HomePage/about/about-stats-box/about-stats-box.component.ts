@@ -68,19 +68,19 @@ export class StatsBoxComponent implements AfterViewInit, OnDestroy {
     if (this.isBrowser) {
       setTimeout(() => {
         if (this.counter1?.nativeElement) {
-          this.animateCounter(this.counter1.nativeElement, 54, 2000, '%');
+          this.animateCounter(this.counter1.nativeElement, 0, 2000, '%');
         }
       }, 500);
 
       setTimeout(() => {
         if (this.counter2?.nativeElement) {
-          this.animateCounter(this.counter2.nativeElement, 92.71, 2000, 'M');
+          this.animateCounter(this.counter2.nativeElement, 0, 2000, 'M');
         }
       }, 700);
 
       setTimeout(() => {
         if (this.counter3?.nativeElement) {
-          this.animateCounter(this.counter3.nativeElement, 9.4, 2000, '%');
+          this.animateCounter(this.counter3.nativeElement, 0, 2000, '%');
         }
       }, 900);
     }
