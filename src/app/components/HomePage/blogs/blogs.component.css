@@ -27,14 +27,13 @@
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(135deg, #4080ff, #6366f1, #3b82f6);
     border-radius: 2px;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 0.2s;
 }
 
 .section-title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     position: relative;
