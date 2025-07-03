@@ -1,137 +1,98 @@
-/* Ultra-optimized about-text.component.css - Target <1.5kB */
-
-.about-text-content {
-  padding: 2rem;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  font-family: 'Montserrat';
+/* General Section Styling */
+.about-section {
+  padding: 4rem 2rem;
+  background-color: #1e1e1e; /* Dark theme background */
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Flex container to hold text and image side by side */
+.about-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Left side text block */
+.about-text {
+  flex: 1 1 500px;
+  min-width: 300px;
+}
+
+/* Title styling */
 .about-title {
-  font-size: clamp(2.25rem, 5vw, 2.625rem);
-  font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: bold;
   margin-bottom: 1.5rem;
-  color: white;
-  animation: slideIn 0.8s ease forwards 0.2s both;
 }
 
+/* Description text */
 .about-description {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 500px;
-  animation: slideUp 0.8s ease forwards 0.4s both;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #dddddd;
 }
 
-.highlight-number {
+/* Right side image block */
+.about-image {
+  flex: 1 1 400px;
   display: flex;
-  align-items: baseline;
-  margin-bottom: 3rem;
-  animation: slideUp 0.8s ease forwards 0.6s both;
-}
-
-.highlight-number .number {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 700;
-  color: white;
-}
-
-.highlight-number .unit {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  margin-left: 0.5rem;
-  color: rgba(255,255,255,0.8);
-}
-
-.button {
-  position: relative;
-  width: 9.375rem;
-  height: 2.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid #1C1C80;
-  background-color: #232396;
-  border-radius: 0.2rem;
-  transition: all 0.3s;
-  animation: slideIn 0.8s ease forwards 0.2s both;
-}
-
-.button__text {
-  transform: translateX(0.625rem);
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.8rem;
-  flex: 1;
-  text-align: left;
-  transition: all 0.3s;
-}
-
-.button__icon {
-  position: absolute;
-  transform: translateX(6.6875rem);
-  height: 100%;
-  width: 2.25rem;
-  border-radius: 0.2rem;
-  background-color: #1C1C80;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  align-items: center;
+  min-width: 250px;
 }
 
-.button:hover {
-  background: #1C1C80;
+/* Image styling */
+.about-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.button:active .button__icon {
-  background-color: #0000cc;
+/* Highlight number (optional counter style) */
+.highlight-number {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00d8ff;
 }
 
-.button:active {
-  border: 1px solid #0000cc;
-}
-
-.no-underline {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-}
-
-@keyframes slideUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  0% { opacity: 0; transform: translateX(-50px) translateY(30px); }
-  100% { opacity: 1; transform: translateX(0) translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .about-text-content {
-    padding: 1.5rem;
-    text-align: center;
-  }
-
+/* Responsive Design for Tablets & Mobile */
+@media (max-width: 1024px) {
   .about-title {
-    font-size: clamp(1.8rem, 7vw, 2.25rem);
+    font-size: 2rem;
   }
 
   .about-description {
-    font-size: clamp(0.875rem, 3vw, 0.95rem);
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text,
+  .about-image {
+    flex: 1 1 100%;
     max-width: 100%;
   }
 
-  .highlight-number {
-    justify-content: center;
+  .about-image img {
+    max-width: 90%;
   }
 
-  .button {
-    width: 100%;
-    max-width: 150px;
-    margin: 0 auto;
+  .highlight-number {
+    font-size: 1.5rem;
   }
 }
